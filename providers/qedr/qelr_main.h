@@ -65,7 +65,15 @@ int qelr_destroy_srq(struct ibv_srq *ibv_srq);
 int qelr_post_srq_recv(struct ibv_srq *, struct ibv_recv_wr *,
 		       struct ibv_recv_wr **bad_wr);
 
+struct ibv_xrcd *qelr_open_xrcd(struct ibv_context *context,
+				struct ibv_xrcd_init_attr *init_attr);
+int qelr_close_xrcd(struct ibv_xrcd *ibxrcd);
+struct ibv_srq *qelr_create_srq_ex(struct ibv_context *context,
+				   struct ibv_srq_init_attr_ex *init_attr);
 struct ibv_qp *qelr_create_qp(struct ibv_pd *, struct ibv_qp_init_attr *);
+struct ibv_qp *qelr_create_qp_ex(struct ibv_context *context,
+				 struct ibv_qp_init_attr_ex *attrx);
+int qelr_get_srq_num(struct ibv_srq *srq, uint32_t *srq_num);
 int qelr_modify_qp(struct ibv_qp *, struct ibv_qp_attr *,
 		   int ibv_qp_attr_mask);
 int qelr_query_qp(struct ibv_qp *qp, struct ibv_qp_attr *attr, int attr_mask,
